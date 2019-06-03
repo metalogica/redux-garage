@@ -10,6 +10,7 @@ import { createHistory as history } from 'history';
 // Components and Containers
 import App from './components/app.jsx';
 import CarsIndex from './containers/cars_index.jsx';
+import CarsShow from './containers/cars_show.jsx';
 
 // DB
 import cars from './data/cars.js';
@@ -38,7 +39,9 @@ ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middleware)}>
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={CarsIndex}/>
+        <Route path="/cars" exact component={CarsIndex}/>
+        <Route path="/cars/:id" component={CarsShow}/>
+        <Redirect from="/" to="/cars"/>
       </Switch>
     </Router>
   </Provider>,

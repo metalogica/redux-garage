@@ -6,3 +6,12 @@ export function listCars() {
     payload: carsList
   }
 }
+
+export const SHOW_CAR = 'SHOW_CAR';
+export function showCar(car_id) {
+  const carsList = fetch('https://wagon-garage-api.herokuapp.com/ahab-and-sons/cars').then(response => response.json());
+  return {
+    type: SHOW_CAR,
+    payload: carsList
+  }
+}

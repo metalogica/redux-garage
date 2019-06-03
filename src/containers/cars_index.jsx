@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { listCars } from '../actions/actions.js';
 
 class CarsIndex extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   componentWillMount() {
     this.props.listCars()
   }
 
-  renderCar({id, brand, model, john, plate}) {
+  renderCar({id, brand, model, owner, plate}) {
     return (
       <ul key={id}>
         <li>Brand: {brand}</li>
         <li>Model: {model}</li>
-        <li>Owner: {john}</li>
+        <li>Owner: {owner}</li>
         <li>Plate: {plate}</li>
+        <Link to={`/cars/${id}`} key={id}>Find out more</Link>
       </ul>
     )
   }
