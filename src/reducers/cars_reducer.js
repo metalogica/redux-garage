@@ -1,9 +1,11 @@
-import { LIST_CARS } from '../actions/actions.js';
+import { LIST_CARS, CREATE_CAR } from '../actions/actions.js';
 
 export default function(state = [], action) {
   switch (action.type) {
     case LIST_CARS:
       return action.payload;
+    case CREATE_CAR:
+      return action.payload
     default:
       return state;
   }

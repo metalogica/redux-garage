@@ -1,35 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Router
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import reduxPromise from 'redux-promise';
-import logger from 'redux-logger';
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { createHistory as history } from 'history';
+
+// Middleware
+import reduxPromise from 'redux-promise';
+import logger from 'redux-logger';
+import { reducer as formReducer } from 'redux-form';
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middleware = composeEnhancers(applyMiddleware(logger, reduxPromise))
 
 // Components and Containers
 import App from './components/app.jsx';
 import CarsIndex from './containers/cars_index.jsx';
 import CarsShow from './containers/cars_show.jsx';
-
-// DB
-import cars from './data/cars.js';
-
-// Initial State
-const garageName = 'garage1';
-const initialState = {
-  cars: cars
-};
+import CarsNew from './containers/cars_new.jsx';
 
 //Import reducers
 import carsReducer from './reducers/cars_reducer.js';
 const reducers = combineReducers({
- cars: carsReducer
+ cars: carsReducer,
+ form: formReducer
 });
 
-// Middleware
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const middleware = composeEnhancers(applyMiddleware(logger, reduxPromise))
+// DB
+import testData from './data/cars.js';
+
+// Initial State
+const garageName = 'garage1';
+const initialState = {
+  cars: undefined
+};
 
 // Stylesheets
 import '../assets/stylesheets/application.scss';
@@ -40,6 +45,7 @@ ReactDOM.render(
     <Router history={history}>
       <Switch>
         <Route path="/cars" exact component={CarsIndex}/>
+        <Route path="/cars/new" exact component={CarsNew}/>
         <Route path="/cars/:id" component={CarsShow}/>
         <Redirect from="/" to="/cars"/>
       </Switch>

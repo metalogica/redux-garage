@@ -28,6 +28,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "redux": "^3.7.2",
+    "redux-form": "^8.2.3",
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.6.0"
   },

@@ -1,17 +1,29 @@
+const BASE_URL = 'https://wagon-garage-api.herokuapp.com/ahab-and-sons/';
+
 export const LIST_CARS = 'LIST_CARS';
 export function listCars() {
-  const carsList = fetch('https://wagon-garage-api.herokuapp.com/ahab-and-sons/cars').then(response => response.json());
+  const endpoint = `${BASE_URL}/cars`;
+  const carsList = fetch(endpoint).then(response => response.json());
   return {
     type: LIST_CARS,
     payload: carsList
   }
 }
 
-export const SHOW_CAR = 'SHOW_CAR';
-export function showCar(car_id) {
-  const carsList = fetch('https://wagon-garage-api.herokuapp.com/ahab-and-sons/cars').then(response => response.json());
+export const CREATE_CAR = 'CREATE_CAR';
+export function createCar(car, callback) {
+  const endpoint = `${BASE_URL}/cars`;
+  const request = fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify(car)})
+    .then( response => response.json())
+    .then( () => callback())
   return {
-    type: SHOW_CAR,
-    payload: carsList
+    type: CREATE_CAR,
+    payload: request
   }
 }

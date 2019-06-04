@@ -10,7 +10,9 @@ class CarsIndex extends Component {
   }
 
   componentWillMount() {
-    this.props.listCars()
+    if (this.props.cars.length === 0) {
+      this.props.listCars();
+    }
   }
 
   renderCar({id, brand, model, owner, plate}) {
@@ -28,7 +30,10 @@ class CarsIndex extends Component {
   render() {
     return (
       <div>
-        {this.props.cars.map( car => { return this.renderCar(car) })}
+        <div>
+          {this.props.cars.map( car => { return this.renderCar(car) })}
+        </div>
+        <Link to='/cars/new'>Add A Car</Link>
       </div>
     )
   }
