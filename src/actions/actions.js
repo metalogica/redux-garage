@@ -1,4 +1,4 @@
-const BASE_URL = 'https://wagon-garage-api.herokuapp.com/ahab-and-sons/';
+const BASE_URL = 'https://wagon-garage-api.herokuapp.com/ahab-and-sons';
 
 export const LIST_CARS = 'LIST_CARS';
 export function listCars() {
@@ -16,12 +16,12 @@ export function createCar(car, callback) {
   const request = fetch(endpoint, {
     method: 'POST',
     headers: {
-      'Accept':'application/json',
-      'Content-Type':'application/json'
+      'Accept':'*/*',
+      'Content-Type':'application/json',
     },
     body: JSON.stringify(car)})
     .then( response => response.json())
-    .then( () => callback())
+    .then( () => callback(car))
   return {
     type: CREATE_CAR,
     payload: request

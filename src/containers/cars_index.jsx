@@ -7,12 +7,15 @@ import { listCars } from '../actions/actions.js';
 class CarsIndex extends Component {
   constructor(props) {
     super(props);
+    this.state ={ hasError: false }
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true }
   }
 
   componentWillMount() {
-    if (this.props.cars.length === 0) {
-      this.props.listCars();
-    }
+    this.props.listCars();
   }
 
   renderCar({id, brand, model, owner, plate}) {
@@ -28,12 +31,17 @@ class CarsIndex extends Component {
   }
 
   render() {
+    if (this.state.hasError) {
+      console.log(error)
+      return <h1>Something went wrong:</h1>
+    }
     return (
       <div>
+        <Link to='/cars/new'>Add A Car</Link>
+        <p>Cars: {this.props.cars.length}</p>
         <div>
           {this.props.cars.map( car => { return this.renderCar(car) })}
         </div>
-        <Link to='/cars/new'>Add A Car</Link>
       </div>
     )
   }
