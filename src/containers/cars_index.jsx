@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { listCars } from '../actions/actions.js';
+import { listCars, deleteCar } from '../actions/actions.js';
 
 class CarsIndex extends Component {
   constructor(props) {
@@ -18,6 +18,12 @@ class CarsIndex extends Component {
     this.props.listCars();
   }
 
+  handleClick = (id) => {
+    this.props.deleteCar(id, () => {
+      this.props.history.push("");
+    })
+  }
+
   renderCar({id, brand, model, owner, plate}) {
     return (
       <ul key={id}>
@@ -26,6 +32,7 @@ class CarsIndex extends Component {
         <li>Owner: {owner}</li>
         <li>Plate: {plate}</li>
         <Link to={`/cars/${id}`} key={id}>Find out more</Link>
+        <a onClick={ () => this.handleClick(id) }>Delete Car</a>
       </ul>
     )
   }
@@ -55,7 +62,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { listCars },
+    { listCars, deleteCar },
     dispatch)
 }
 

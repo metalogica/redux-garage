@@ -16,7 +16,7 @@ export function createCar(car, callback) {
   const request = fetch(endpoint, {
     method: 'POST',
     headers: {
-      'Accept':'*/*',
+      'Accept':'application/json',
       'Content-Type':'application/json',
     },
     body: JSON.stringify(car)})
@@ -25,5 +25,17 @@ export function createCar(car, callback) {
   return {
     type: CREATE_CAR,
     payload: request
+  }
+}
+
+export const DELETE_CAR = 'DELETE_CAR';
+export function deleteCar(carId, callback) {
+  const endpoint = `https://wagon-garage-api.herokuapp.com/cars/${carId}`;
+  fetch(endpoint, { method: 'DELETE'})
+    .then( response => response.json() )
+    .then( () => callback() )
+  return {
+    type: DELETE_CAR,
+    payload: carId
   }
 }
