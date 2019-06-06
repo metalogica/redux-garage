@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { listCars, deleteCar } from '../actions/actions.js';
+import Aside from './aside.jsx';
 
 class CarsIndex extends Component {
   constructor(props) {
     super(props);
-    this.state ={ hasError: false }
+    this.state = { hasError: false }
   }
 
   static getDerivedStateFromError(error) {
@@ -46,6 +47,7 @@ class CarsIndex extends Component {
       <div>
         <Link to='/cars/new'>Add A Car</Link>
         <p>Cars: {this.props.cars.length}</p>
+        <Aside/>
         <div>
           {this.props.cars.map( car => { return this.renderCar(car) })}
         </div>

@@ -20,21 +20,24 @@ import CarsIndex from './containers/cars_index.jsx';
 import CarsShow from './containers/cars_show.jsx';
 import CarsNew from './containers/cars_new.jsx';
 
-//Import reducers
-import carsReducer from './reducers/cars_reducer.js';
-const reducers = combineReducers({
- cars: carsReducer,
- form: formReducer
-});
-
 // DB
 import testData from './data/cars.js';
 
 // Initial State
-const garageName = 'garage1';
+const garageList = ['ahab-and-sons', 'slimboy'];
 const initialState = {
-  cars: undefined
+  cars: undefined,
+  garage: garageList,
 };
+
+//Import reducers
+import carsReducer from './reducers/cars_reducer.js';
+import garageReducer from './reducers/garage_reducer.js';
+const reducers = combineReducers({
+ cars: carsReducer,
+ garage: garageReducer,
+ form: formReducer
+});
 
 // Stylesheets
 import '../assets/stylesheets/application.scss';
@@ -47,7 +50,8 @@ ReactDOM.render(
         <Route path="/cars" exact component={CarsIndex}/>
         <Route path="/cars/new" exact component={CarsNew}/>
         <Route path="/cars/:id" component={CarsShow}/>
-        <Redirect from="/" to="/cars"/>
+        <Route path="/test" exact component={App}/>
+        <Redirect from="/" to="/garagelis"/>
       </Switch>
     </Router>
   </Provider>,

@@ -1,5 +1,6 @@
 const BASE_URL = 'https://wagon-garage-api.herokuapp.com/ahab-and-sons';
 
+// CARS ACTIONS
 export const LIST_CARS = 'LIST_CARS';
 export function listCars() {
   const endpoint = `${BASE_URL}/cars`;
@@ -37,5 +38,14 @@ export function deleteCar(carId, callback) {
   return {
     type: DELETE_CAR,
     payload: carId
+  }
+}
+
+//GARAGE ACTIONS
+export const SELECT_GARAGE = 'SELECT_GARAGE';
+export default function selectGarage(garageName) {
+  return {
+    type: SELECT_GARAGE,
+    payload: garageName
   }
 }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createCar } from '../actions/actions.js';
 import { Link, Redirect } from 'react-router-dom';
+import Aside from './aside.jsx';
 
 class CarsNew extends Component {
   constructor(props) {
