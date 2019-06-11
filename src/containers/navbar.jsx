@@ -3,22 +3,25 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectGarage } from '../actions/actions.js';
 
-class Aside extends Component {
-  static defaultProps = {
-    test: 'aside rendered correctly'
-  }
+// Router
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { createHistory as history } from 'history';
 
+// Containers
+import CarsIndex from './cars_index.jsx';
+
+class Aside extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
-    return(
+    return (
       <div>
-        <span>You are currently visting garage: {this.props.garage[0]}.</span>
-        <p>Click on the garage that you would like to switch to:</p>
         <ul>
-          {this.props.garage.map( garage => { return garage })}
+          {this.props.garages.map( (garage, index) => {
+            return <li key={index + 1}><a href={`/${garage}`}>{garage}</a></li>
+          })}
         </ul>
       </div>
     )
@@ -27,13 +30,13 @@ class Aside extends Component {
 
 function mapStateToProps(state) {
   return ({
-    garage: state.garage
+    garages: state.garages
   })
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-  { selectGarage: selectGarage },
+  { },
   dispatch)
 }
 

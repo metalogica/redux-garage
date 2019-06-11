@@ -1,14 +1,23 @@
+// Core modules
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+// Actions
 import { listCars, deleteCar } from '../actions/actions.js';
-import Aside from './aside.jsx';
+// Router
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { createHistory as history } from 'history';
+// Child Containers
+import CarsShow from './cars_show.jsx';
+import CarsNew from './cars_new.jsx';
+import Navbar from './navbar.jsx';
 
 class CarsIndex extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false }
+    this.state = {
+      hasError: false,
+    }
   }
 
   static getDerivedStateFromError(error) {
@@ -16,7 +25,7 @@ class CarsIndex extends Component {
   }
 
   componentWillMount() {
-    this.props.listCars();
+    this.props.listCars(this.props.match.url);
   }
 
   handleClick = (id) => {
@@ -32,7 +41,7 @@ class CarsIndex extends Component {
         <li>Model: {model}</li>
         <li>Owner: {owner}</li>
         <li>Plate: {plate}</li>
-        <Link to={`/cars/${id}`} key={id}>Find out more</Link>
+        <Link to={`${this.props.match.url}/${id}`} key={id}>Find out more</Link>
         <a onClick={ () => this.handleClick(id) }>Delete Car</a>
       </ul>
     )
@@ -41,17 +50,23 @@ class CarsIndex extends Component {
   render() {
     if (this.state.hasError) {
       console.log(error)
-      return <h1>Something went wrong:</h1>
+      return <h1>Something went wrong.</h1>
     }
     return (
-      <div>
-        <Link to='/cars/new'>Add A Car</Link>
-        <p>Cars: {this.props.cars.length}</p>
-        <Aside/>
+      <Router>
         <div>
-          {this.props.cars.map( car => { return this.renderCar(car) })}
+          <Navbar/>
+          <Link to={`${this.props.match.url}/new`}>Add A Car</Link>
+          <p>Cars: {this.props.cars.length}</p>
+          <div>
+            {this.props.cars.map( car => { return this.renderCar(car) })}
+          </div>
+          <Switch>
+            <Route exact path={`${this.props.match.path}/new`} component={CarsNew} />
+            <Route exact path={`${this.props.match.path}/:id`} component={CarsShow}/>
+          </Switch>
         </div>
-      </div>
+      </Router>
     )
   }
 }

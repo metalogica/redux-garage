@@ -15,10 +15,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = composeEnhancers(applyMiddleware(logger, reduxPromise))
 
 // Components and Containers
-import App from './components/app.jsx';
 import CarsIndex from './containers/cars_index.jsx';
-import CarsShow from './containers/cars_show.jsx';
-import CarsNew from './containers/cars_new.jsx';
 
 // DB
 import testData from './data/cars.js';
@@ -27,7 +24,7 @@ import testData from './data/cars.js';
 const garageList = ['ahab-and-sons', 'slimboy'];
 const initialState = {
   cars: undefined,
-  garage: garageList,
+  garages: garageList,
 };
 
 //Import reducers
@@ -35,7 +32,7 @@ import carsReducer from './reducers/cars_reducer.js';
 import garageReducer from './reducers/garage_reducer.js';
 const reducers = combineReducers({
  cars: carsReducer,
- garage: garageReducer,
+ garages: garageReducer,
  form: formReducer
 });
 
@@ -47,11 +44,9 @@ ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middleware)}>
     <Router history={history}>
       <Switch>
-        <Route path="/cars" exact component={CarsIndex}/>
-        <Route path="/cars/new" exact component={CarsNew}/>
-        <Route path="/cars/:id" component={CarsShow}/>
-        <Route path="/test" exact component={App}/>
-        <Redirect from="/" to="/garagelis"/>
+        <Route path="/ahab-and-sons" component={CarsIndex}/>
+        <Route path="/slimboy" component={CarsIndex}/>
+        <Redirect from='/' to='/slimboy'/>
       </Switch>
     </Router>
   </Provider>,

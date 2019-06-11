@@ -4,20 +4,28 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createCar } from '../actions/actions.js';
 import { Link, Redirect } from 'react-router-dom';
-import Aside from './aside.jsx';
 
 class CarsNew extends Component {
   constructor(props) {
     super(props)
+    this.state = { garage: this.props.match.url }
   }
 
   onSubmit = (values) => {
-    this.props.createCar(values, (car) => {
+    const garage = this.findGarage();
+    this.props.createCar(values, garage, (car) => {
       this.props.history.push('/');
     });
   }
 
+  findGarage() {
+    const garageList = this.props.garages;
+    const garage = this.props.match.url.split('/')[1];
+    return garageList.find( name => name === garage);
+  }
+
   render() {
+    this.findGarage()
     return(
       <div className='form-group'>
         <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -43,7 +51,8 @@ class CarsNew extends Component {
 
 function mapStateToProps(state) {
   return({
-    cars: state.cars
+    cars: state.cars,
+    garages: state.garages
   })
 }
 
