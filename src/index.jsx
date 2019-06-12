@@ -16,6 +16,8 @@ const middleware = composeEnhancers(applyMiddleware(logger, reduxPromise))
 
 // Components and Containers
 import CarsIndex from './containers/cars_index.jsx';
+import CarsShow from './containers/cars_show.jsx';
+import CarsNew from './containers/cars_new.jsx';
 
 // DB
 import testData from './data/cars.js';
@@ -43,9 +45,13 @@ import '../assets/stylesheets/application.scss';
 ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middleware)}>
     <Router history={history}>
+      <ul>
+        {garageList.map( (garage, index) => {
+          return <li key={index + 1}><Link to={`${garage}`}>{garage}</Link></li>
+        })}
+      </ul>
       <Switch>
-        <Route path="/ahab-and-sons" component={CarsIndex}/>
-        <Route path="/slimboy" component={CarsIndex}/>
+        <Route exact path="/:garage" component={CarsIndex}/>
         <Redirect from='/' to='/slimboy'/>
       </Switch>
     </Router>

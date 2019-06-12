@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { createCar } from '../actions/actions.js';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom'
 
 class CarsNew extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ class CarsNew extends Component {
   onSubmit = (values) => {
     const garage = this.findGarage();
     this.props.createCar(values, garage, (car) => {
-      this.props.history.push('/');
+      // this.props.history.push('/');
+      location.reload();
     });
   }
 

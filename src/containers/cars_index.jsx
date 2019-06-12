@@ -28,9 +28,17 @@ class CarsIndex extends Component {
     this.props.listCars(this.props.match.url);
   }
 
+  // Wil lre-render the index component when the path changes
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.url != this.props.match.url) {
+      this.props.listCars(this.props.match.url);
+    }
+  }
+
   handleClick = (id) => {
     this.props.deleteCar(id, () => {
-      this.props.history.push("");
+      // this.props.history.push("");
+      location.reload();
     })
   }
 
@@ -55,7 +63,6 @@ class CarsIndex extends Component {
     return (
       <Router>
         <div>
-          <Navbar/>
           <Link to={`${this.props.match.url}/new`}>Add A Car</Link>
           <p>Cars: {this.props.cars.length}</p>
           <div>
@@ -71,7 +78,7 @@ class CarsIndex extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return({
     cars: state.cars
   })
