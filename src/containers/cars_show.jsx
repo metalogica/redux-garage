@@ -9,6 +9,14 @@ import Gallery from '../components/gallery.jsx';
 class CarsShow extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isChecked: false
+    }
+  }
+
+  onChange = () => {
+
   }
 
   renderCar({id, brand, model, owner, plate}) {
@@ -18,8 +26,12 @@ class CarsShow extends Component {
         <p>Model: {model}</p>
         <p>Owner: {owner}</p>
         <p>Plate: {plate}</p>
+        <label>
+          <input type="checkbox" chcked={this.state.isChecked} onChange={this.onChange}/>
+          {this.state.isChecked ? this.props.labelOn : this.props.labelOff }
+        </label>
         <Link to='/'>Back to homepage.</Link>
-        <Gallery carImg={`../../assets/images/car1.jpg`}/>
+        <Gallery carImg={`../../assets/images/car1.jpg`} />
       </div>
     )
   }
@@ -32,7 +44,7 @@ class CarsShow extends Component {
 function mapStateToProps(state, ownProps) {
   const id = parseInt(ownProps.match.params.id, 10)
   return({
-    car: state.cars.find( car => car.id === id)
+    car: state.cars.find( car => car.id === id),
   })
 }
 

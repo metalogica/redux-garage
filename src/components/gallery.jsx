@@ -6,18 +6,20 @@ class Gallery extends Component {
     super(props);
 
     this.state = {
-      carImg: props.carImg,
-      carId: parseInt(Math.random() * 3, 10)
+      carImg: props.carImg
     }
   }
 
+  genRandNumber() {
+    return parseInt(Math.random() * 3, 10);
+  }
 
   render() {
     console.log(path);
     return(
       <div>
         Gallery rendered
-        <img src={`../../assets/images/car${this.carId}.jpg`}/>
+        <img src={`../../assets/images/car${this.genRandNumber}.jpg`}/>
       </div>
     )
   }
