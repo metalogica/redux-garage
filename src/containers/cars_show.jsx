@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+// components & containers
+import Gallery from '../components/gallery.jsx';
 
 class CarsShow extends Component {
   constructor(props) {
@@ -16,6 +18,7 @@ class CarsShow extends Component {
         <p>Owner: {owner}</p>
         <p>Plate: {plate}</p>
         <Link to='/'>Back to homepage.</Link>
+        <Gallery carImg={`../../assets/images/car1.jpg`}/>
       </div>
     )
   }
