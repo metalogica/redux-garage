@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 // components & containers
 import Gallery from '../components/gallery.jsx';
 
@@ -38,6 +39,14 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     { }, dispatch)
+}
+
+CarsShow.propTypes = {
+  id: PropTypes.number,
+  brand: PropTypes.string.isRequired,
+  model: PropTypes.string.isRequired,
+  owner: PropTypes.string.isRequired,
+  plate: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarsShow);

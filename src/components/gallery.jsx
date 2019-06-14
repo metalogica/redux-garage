@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from'prop-types';
 
-
 class Gallery extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      carImg: props.carImg
+      carImg: props.carImg,
+      carId: parseInt(Math.random() * 3, 10)
     }
   }
 
@@ -17,7 +17,7 @@ class Gallery extends Component {
     return(
       <div>
         Gallery rendered
-        <img src={`../../assets/images/car1.jpg`}/>
+        <img src={`../../assets/images/car${this.carId}.jpg`}/>
       </div>
     )
   }
