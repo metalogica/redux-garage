@@ -7,7 +7,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   devtool: 'sourcemap',
-  devServer: { historyApiFallback: true },
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     rules: [
       {
@@ -19,6 +21,15 @@ module.exports = {
         test: /\.s?css$/,
         exclude: /node_modules/,
         loaders: [ 'style-loader', 'css-loader', 'sass-loader' ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            outputPath: 'images'
+          }
+        }]
       }
     ]
   },

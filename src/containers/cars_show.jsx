@@ -27,11 +27,11 @@ class CarsShow extends Component {
         <p>Owner: {owner}</p>
         <p>Plate: {plate}</p>
         <label>
-          <input type="checkbox" chcked={this.state.isChecked} onChange={this.onChange}/>
+          <input type="checkbox" checked={this.state.isChecked} onChange={this.onChange}/>
           {this.state.isChecked ? this.props.labelOn : this.props.labelOff }
         </label>
         <Link to='/'>Back to homepage.</Link>
-        <Gallery carImg={`../../assets/images/car1.jpg`} />
+        <Gallery />
       </div>
     )
   }
@@ -55,10 +55,10 @@ function mapDispatchToProps(dispatch) {
 
 CarsShow.propTypes = {
   id: PropTypes.number,
-  brand: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired,
-  plate: PropTypes.string.isRequired
+  brand: PropTypes.string,
+  model: PropTypes.string,
+  owner: PropTypes.string,
+  plate: PropTypes.string,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarsShow);

@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 // Actions
 import { listCars, deleteCar } from '../actions/actions.js';
 // Router
@@ -89,10 +88,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     { listCars, deleteCar },
     dispatch)
-}
-
-CarsIndex.propTypes = {
-  garageList: PropTypes.isOneOf(['ahab-and-sons', 'slimboy']).isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarsIndex);

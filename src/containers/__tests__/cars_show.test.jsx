@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-configure({adapter: new Adappter() })
+configure({adapter: new Adapter() })
 
 import CarsShow from '../cars_show.jsx';
 
